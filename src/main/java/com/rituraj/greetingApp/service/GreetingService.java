@@ -62,8 +62,8 @@ public class GreetingService {
     }
 
 
-    public String deleteGreeting() {
-        return "{\"message\": \"Hello, this is a DELETE request!\"}";
+    public void deleteGreeting(int id) {
+        greetingsRepo.deleteById(id);
     }
 
     public String getMessageById(int id) {
