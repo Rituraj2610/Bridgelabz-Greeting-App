@@ -39,8 +39,9 @@ public class GreetingController {
     }
 
     @PutMapping
-    public String updateGreeting() {
-        return greetingService.updateGreeting();
+    public void updateGreeting(@RequestParam(value = "id") int id,
+                                 @RequestParam(value = "msg") String msg) {
+        greetingService.updateGreeting(id, msg);
     }
 
     @DeleteMapping

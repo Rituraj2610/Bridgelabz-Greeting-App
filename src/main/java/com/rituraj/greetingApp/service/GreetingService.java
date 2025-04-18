@@ -52,8 +52,13 @@ public class GreetingService {
     }
 
 
-    public String updateGreeting() {
-        return "{\"message\": \"Hello, this is a PUT request!\"}";
+    public void updateGreeting(int id, String msg) {
+        Optional<Greeting> optional = greetingsRepo.findById(id);
+        if(optional.isPresent()){
+            Greeting greeting = optional.get();
+            greeting.setMessage(msg);
+            greetingsRepo.save(greeting);
+        }
     }
 
 
