@@ -22,21 +22,21 @@ public class GreetingService {
         if (firstName != null && lastName != null) {
             Greeting greeting = new Greeting(String.format("Hello, %s %s!", firstName, lastName));
             greetingsRepo.save(greeting);
-            Optional<Greeting> optional = greetingsRepo.findById(greeting.getMessage());
+            Optional<Greeting> optional = greetingsRepo.findById(1);
             if(optional.isPresent()){
                 return optional.get().getMessage();
             }
         } else if (firstName != null) {
             Greeting greeting = new Greeting(String.format("Hello, %s %s!", firstName, lastName));
             greetingsRepo.save(greeting);
-            Optional<Greeting> optional = greetingsRepo.findById(greeting.getMessage());
+            Optional<Greeting> optional = greetingsRepo.findById(1);
             if(optional.isPresent()){
                 return optional.get().getMessage();
             }
         } else if (lastName != null) {
             Greeting greeting = new Greeting(String.format("Hello, %s %s!", firstName, lastName));
             greetingsRepo.save(greeting);
-            Optional<Greeting> optional = greetingsRepo.findById(greeting.getMessage());
+            Optional<Greeting> optional = greetingsRepo.findById(1);
             if(optional.isPresent()){
                 return optional.get().getMessage();
             }
@@ -58,5 +58,13 @@ public class GreetingService {
 
     public String deleteGreeting() {
         return "{\"message\": \"Hello, this is a DELETE request!\"}";
+    }
+
+    public String getMessageById(int id) {
+        Optional<Greeting> optional = greetingsRepo.findById(1);
+        if(optional.isPresent()){
+            return optional.get().getMessage();
+        }
+        return null;
     }
 }
