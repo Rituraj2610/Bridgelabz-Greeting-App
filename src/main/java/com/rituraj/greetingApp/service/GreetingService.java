@@ -1,24 +1,48 @@
 package com.rituraj.greetingApp.service;
 
+import com.rituraj.greetingApp.model.Greeting;
+import com.rituraj.greetingApp.repo.GreetingsRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.util.Optional;
+
 @Service
 public class GreetingService {
 
+    private GreetingsRepo greetingsRepo;
+    public GreetingService(GreetingsRepo greetingsRepo){
+        this.greetingsRepo = greetingsRepo;
+    }
+
     public String getGreeting(String firstName, String lastName) {
         if (firstName != null && lastName != null) {
-            return String.format("Hello, %s %s!", firstName, lastName);
+            Greeting greeting = new Greeting(String.format("Hello, %s %s!", firstName, lastName));
+            greetingsRepo.save(greeting);
+            Optional<Greeting> optional = greetingsRepo.findById(greeting.getMessage());
+            if(optional.isPresent()){
+                return optional.get().getMessage();
+            }
         } else if (firstName != null) {
-            return String.format("Hello, %s!", firstName);
+            Greeting greeting = new Greeting(String.format("Hello, %s %s!", firstName, lastName));
+            greetingsRepo.save(greeting);
+            Optional<Greeting> optional = greetingsRepo.findById(greeting.getMessage());
+            if(optional.isPresent()){
+                return optional.get().getMessage();
+            }
         } else if (lastName != null) {
-            return String.format("Hello, %s!", lastName);
-        } else {
-            return "Hello World!";
+            Greeting greeting = new Greeting(String.format("Hello, %s %s!", firstName, lastName));
+            greetingsRepo.save(greeting);
+            Optional<Greeting> optional = greetingsRepo.findById(greeting.getMessage());
+            if(optional.isPresent()){
+                return optional.get().getMessage();
+            }
         }
+            return "Hello World!";
+
     }
 
 
