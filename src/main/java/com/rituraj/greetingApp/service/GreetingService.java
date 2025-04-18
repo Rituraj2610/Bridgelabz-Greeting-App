@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -66,5 +67,10 @@ public class GreetingService {
             return optional.get().getMessage();
         }
         return null;
+    }
+
+    public List<Greeting> getAllMessages() {
+        List<Greeting> list = greetingsRepo.findAll();
+        return list;
     }
 }
