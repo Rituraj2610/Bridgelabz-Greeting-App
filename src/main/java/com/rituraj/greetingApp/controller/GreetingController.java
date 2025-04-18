@@ -13,6 +13,11 @@ public class GreetingController {
         this.greetingService = greetingService;
     }
 
+    @GetMapping("/id")
+    public String getMessageById(@RequestParam int id){
+        return greetingService.getMessageById(id);
+    }
+
     @GetMapping
     public String greet(@RequestParam(value = "firstname", required = false) String firstName,
                         @RequestParam(value = "lastname", required = false) String lastName) {
