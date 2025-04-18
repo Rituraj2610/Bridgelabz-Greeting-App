@@ -1,27 +1,35 @@
 package com.rituraj.greetingApp.controller;
+import com.rituraj.greetingApp.service.GreetingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/greetings")
 public class GreetingController {
+    private GreetingService greetingService;
+
+    @Autowired
+    public GreetingController(GreetingService greetingService){
+        this.greetingService = greetingService;
+    }
 
     @GetMapping
     public String getGreeting() {
-        return "{\"message\": \"Hello, this is a GET request!\"}";
+        return greetingService.getGreeting();
     }
 
     @PostMapping
     public String createGreeting() {
-        return "{\"message\": \"Hello, this is a POST request!\"}";
+        return greetingService.createGreeting();
     }
 
     @PutMapping
     public String updateGreeting() {
-        return "{\"message\": \"Hello, this is a PUT request!\"}";
+        return greetingService.updateGreeting();
     }
 
     @DeleteMapping
     public String deleteGreeting() {
-        return "{\"message\": \"Hello, this is a DELETE request!\"}";
+        return greetingService.deleteGreeting();
     }
 }
